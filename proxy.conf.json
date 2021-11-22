@@ -1,0 +1,7 @@
+{
+    "/api/*":{
+        "target": "http://solodata.es/",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

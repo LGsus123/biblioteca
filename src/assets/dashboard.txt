@@ -1,0 +1,58 @@
+<app-header></app-header>
+<br>
+
+<div class="container">
+  <h3>Lista Libros</h3> 
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <input class="form-control" type="text" placeholder="Buscar libro..." name="filterBook" [(ngModel)]="filterBook">
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Subtitle</th>
+        <th scope="col">Isbn13</th>
+        <th scope="col">Price</th>
+        <th scope="col">URL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let libro of libros | slice: desde:hasta | filter:filterBook" (click)="verCaratula(libro.title, libro.image, libro.price, caratulaModal)">
+        <th scope="row">{{ libro.title }}</th>
+        <td>{{ libro.subtitle }}</td>
+        <td>{{ libro.isbn13 }}</td>
+        <td>{{ libro.price }}</td>
+        <td>{{ libro.url }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <!--  [length]="libro.length" -->
+  <mat-paginator [length]="100"
+                  [pageSize]="pageSize"
+                  [pageSizeOptions]="[5, 10, 25, 100]"
+                  (page)="cambiarPagina($event)">
+</mat-paginator>
+</div>
+
+<!-- Modal -->
+<ng-template #caratulaModal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">{{title}}</h4>
+
+    </div>
+    <div class="modal-body  text-center">
+      <img src="{{ image }}">
+    </div>
+    <div class="modal-footer">
+      <h5 class="modal-title">{{ price }}</h5>
+    </div>
+  </div>
+</ng-template>
+
+<app-footer></app-footer>
